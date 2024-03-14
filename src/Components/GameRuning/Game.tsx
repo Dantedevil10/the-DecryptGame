@@ -34,7 +34,7 @@ function Game(){
             if (minutos === 0 && segundos === 0) {
                 clearInterval(interval);
                 open = setTimeout(()=>{setApearTheGame(false),setFinalTime(true),setAudioLoaded(false)},10)
-                close = setTimeout(()=>{setFinalTime(false),setLose(true)},13000)
+                close = setTimeout(()=>{setFinalTime(false),setLose(true)},15000)
             } else {
                 if (segundos === 0) {
                     setMinutos(minutos - 1);
@@ -81,11 +81,11 @@ function Game(){
            
                 if( currentSeeText !== "socorro me ajudem"){
                     open = setTimeout(()=>{setApearTheGame(false),setFinalNormal(true),setAudioLoaded(false)},500)
-                    close = setTimeout(()=>{setFinalNormal(false),setLose(true)},19000)
+                    close = setTimeout(()=>{setFinalNormal(false),setLose(true)},21000)
                 } 
                 else{
                     open = setTimeout(()=>{setApearTheGame(false),setWin(true),setAudioLoaded(false)},500)
-                    close = setTimeout(()=>{setWin(false),setLose(false),setWinner(true)},20000)
+                    close = setTimeout(()=>{setWin(false),setLose(false),setWinner(true)},22000)
                 }
 
                 if(lose){
