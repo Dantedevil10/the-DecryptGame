@@ -7,6 +7,7 @@ import audio1 from '/src/Assets/Songs/Phrase/PRimeira-palavra_Sound.mp3'
 import audio2 from '/src/Assets/Songs/Phrase/segunda-frase.mp3'
 import audio3 from '/src/Assets/Songs/Phrase/Ultima-Frase.mp3'
 import audioStart from '/src/Assets/Songs/letstartthegame.mp3'
+import songBit from '/src/Assets/Songs/Effects/EffectsSounds(Entering).mp3'
 
 import videoWin from '/src/Assets/Video/Youwin.mp4'
 import videoLoseT from '/src/Assets/Video/LoseForTime.mp4'
@@ -63,6 +64,7 @@ function Game(){
         return ()=>{}
     }, []);
 
+    const [bitSong,setBitSong] = useState(false)
 
     const [appearthegame,setApearTheGame] = useState(true)
     const [lose,setLose] = useState(false)
@@ -74,30 +76,37 @@ function Game(){
     useEffect(()=>{
         let open:any;
         let close:any;
-        document.addEventListener('keyup',event =>{
+        const aperte = (event:KeyboardEvent) =>{
+            setBitSong(true)
              
             if(event.key === 'Enter'){
                 const currentSeeText = seeTextRef.current.toLowerCase();
            
                 if( currentSeeText !== "socorro me ajudem"){
-                    open = setTimeout(()=>{setApearTheGame(false),setFinalNormal(true),setAudioLoaded(false)},500)
-                    close = setTimeout(()=>{setFinalNormal(false),setLose(true)},21000)
+                    open = setTimeout(()=>{setApearTheGame(false),setFinalNormal(true),setAudioLoaded(false)},10)
+                    close = setTimeout(()=>{setFinalNormal(false),setLose(true)},19000)
                 } 
                 else{
-                    open = setTimeout(()=>{setApearTheGame(false),setWin(true),setAudioLoaded(false)},500)
-                    close = setTimeout(()=>{setWin(false),setLose(false),setWinner(true)},22000)
+                    open = setTimeout(()=>{setApearTheGame(false),setWin(true),setAudioLoaded(false)},10)
+                    close = setTimeout(()=>{setWin(false),setLose(false),setWinner(true)},19000)
                 }
 
-                if(lose){
-                    open = setTimeout(()=>{setApearTheGame(false)},500)
-                }else if (winner == true && lose == false){
-                    open = setTimeout(()=>{setApearTheGame(false)},500)
-                }
+                // if(lose || (winner && !lose)){
+                //     setApearTheGame(false)
+                // }
             }
-        
-        })
+            
+        }
+        document.addEventListener('keypress',aperte)
+        // if(lose)setTimeout(()=>{},1000)
+        if(lose || (winner && !lose)){
+            setApearTheGame(false)
+            // open = setTimeout(()=>{document.removeEventListener('keypress',aperte)},10)
+        }
+
         return () => {clearTimeout(open),clearTimeout(close)}
-    },[seeText,minutos,segundos])
+    },[seeText,minutos,segundos,lose,winner])
+    
 
 
     return(<>
@@ -111,6 +120,8 @@ function Game(){
           </audio>
         </div>}
     </div>
+
+    {bitSong && <audio src={songBit} autoPlay/>}
 
     {win && <video width="100%" height="100%" autoPlay controls={false}>
     <source src={videoWin} type="video/mp4" />
