@@ -28,14 +28,13 @@ function Start(){
     
 
     return(<>
+    <audio src={songMenu} autoPlay/>
     
     <h1 className="text-3xl text-red-700 absolute top-1/2 left-1/2 transform -translate-x-1/2
     -translate-y-1/2 blink">Press Enter To Start</h1>
 
     {showStart && <p className="text-1xl text-red-700 mt-10 ml-10 word">A Game By Dante <br />not the final version <br /> 
     <p className="text-xs word2">Github:<a className="inline-block border-b-2 border-transparent hover:border-red-500" href={Url}>github/Dantedevil10</a></p></p>}
-
-    <audio src={songMenu} autoPlay/>
 
     {bitSong && <audio src={songBit} autoPlay/>}
     </>)

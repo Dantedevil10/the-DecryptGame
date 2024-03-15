@@ -32,7 +32,7 @@ function App() {
           setmenu(false);
           setDetectEnter(false); // Desativar a detecção do Enter quando o jogo começar
           document.removeEventListener('keyup', handleKeyUp); // Remover o listener de keyup
-        }, 39000);
+        }, 37000);
       }
     };
 
@@ -46,6 +46,17 @@ function App() {
   }, [detectEnter]);
 
   const [startgame,setStartGame] = useState(false)
+
+  useEffect(() => {
+    if (startVideo) {
+      const videoTimeout = setTimeout(() => {
+        setStartGame(true);
+        setmenu(false);
+        setStartVideo(false);
+      }, 39000); // 39 segundos
+      return () => clearTimeout(videoTimeout);
+    }
+  }, [startVideo]);
   
 
   return (
