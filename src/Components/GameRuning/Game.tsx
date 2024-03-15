@@ -135,13 +135,13 @@ function Game(){
         <h1 className='text-center title'>Decrypt the Message</h1>
         <div className="tips-container">
             <div id="n1" className="song flex flex-col text-center items-center write-animation"><audio controls><source src={audio1} type=""/></audio>
-            <label htmlFor="n1">Primeira Palavra</label>
+            <label htmlFor="n1"></label>
             </div>
             <div id="n2" className="song flex flex-col text-center items-center write-animation"><audio controls><source src={audio2}/></audio>
-            <label htmlFor="n2">Segunda Palavra</label>
+            <label htmlFor="n2"></label>
             </div>
             <div id="n3" className="song flex flex-col text-center items-center write-animation"><audio controls><source src={audio3}/></audio>
-            <label htmlFor="n3">Ultima Palavra</label>
+            <label htmlFor="n3"></label>
             </div>
         </div>
         <div className="dicas-posicoes flex">
