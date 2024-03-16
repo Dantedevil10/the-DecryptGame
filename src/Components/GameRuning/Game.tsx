@@ -58,54 +58,52 @@ function Game(){
     return () => clearTimeout(interval);
     }, []);
 
+
     const [audioLoaded, setAudioLoaded] = useState(true);
     useEffect(() => {
        
         return ()=>{}
     }, []);
 
-    const [bitSong,setBitSong] = useState(false)
 
+    const [bitSong,setBitSong] = useState(false)
     const [appearthegame,setApearTheGame] = useState(true)
     const [lose,setLose] = useState(false)
     const [winner,setWinner] = useState(false)
     const [finaltime,setFinalTime] = useState(false)
     const [finalnormal,setFinalNormal] = useState(false)
+
     const [win,setWin] = useState(false)
 
     useEffect(()=>{
-        let open:any;
-        let close:any;
-        const aperte = (event:KeyboardEvent) =>{
-            setBitSong(true)
-             
-            if(event.key === 'Enter'){
-                const currentSeeText = seeTextRef.current.toLowerCase();
-           
-                if( currentSeeText !== "socorro me ajudem"){
-                    open = setTimeout(()=>{setApearTheGame(false),setFinalNormal(true),setAudioLoaded(false)},10)
-                    close = setTimeout(()=>{setFinalNormal(false),setLose(true)},19000)
-                } 
-                else{
-                    open = setTimeout(()=>{setApearTheGame(false),setWin(true),setAudioLoaded(false)},10)
-                    close = setTimeout(()=>{setWin(false),setLose(false),setWinner(true)},19000)
-                }
-
-                // if(lose || (winner && !lose)){
-                //     setApearTheGame(false)
-                // }
-            }
+            let open:any;
+            let close:any;
+            const aperte = (event:KeyboardEvent) =>{
+                
+                if(event.key === 'Enter' && (!lose && !winner)){
+                    setBitSong(true)
+                    const currentSeeText = seeTextRef.current.toLowerCase();
             
-        }
-        document.addEventListener('keypress',aperte)
-        // if(lose)setTimeout(()=>{},1000)
-        if(lose || (winner && !lose)){
-            setApearTheGame(false)
-            // open = setTimeout(()=>{document.removeEventListener('keypress',aperte)},10)
-        }
+                    if( currentSeeText !== "socorro me ajudem"){
+                        open = setTimeout(()=>{setApearTheGame(false),setFinalNormal(true),setAudioLoaded(false)},10)
+                        close = setTimeout(()=>{setFinalNormal(false),setLose(true)},20000)
+                    } 
+                    else{
+                        open = setTimeout(()=>{setApearTheGame(false),setWin(true),setAudioLoaded(false)},10)
+                        close = setTimeout(()=>{setWin(false),setWinner(true)},20000)
+                    }
 
-        return () => {clearTimeout(open),clearTimeout(close)}
-    },[seeText,minutos,segundos,lose,winner])
+                    if(lose || (winner && !lose)){
+                        setApearTheGame(false)
+                    
+                    }
+                }
+            }
+        
+        document.addEventListener('keypress',aperte)
+        
+        return () => {clearTimeout(open),clearTimeout(close),document.removeEventListener('keypress',aperte)}
+    },[seeText,lose,winner])
     
 
 
@@ -142,10 +140,10 @@ function Game(){
     {lose && <Lose/>}
     
     {appearthegame &&
-        <div>
+    <div>
         <h1 className='text-center title'>Decrypt the Message</h1>
         <div className="tips-container">
-            <div id="n1" className="song flex flex-col text-center items-center write-animation"><audio controls><source src={audio1} type=""/></audio>
+            <div id="n1" className="song flex flex-col text-center items-center write-animation"><audio controls><source src={audio1}/></audio>
             <label htmlFor="n1"></label>
             </div>
             <div id="n2" className="song flex flex-col text-center items-center write-animation"><audio controls><source src={audio2}/></audio>

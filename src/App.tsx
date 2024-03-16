@@ -29,10 +29,9 @@ function App() {
         close = setTimeout(() => {
          
           setStartGame(true);
-          setmenu(false);
           setDetectEnter(false); // Desativar a detecção do Enter quando o jogo começar
           document.removeEventListener('keyup', handleKeyUp); // Remover o listener de keyup
-        }, 37000);
+        }, 36500);
       }
     };
 
